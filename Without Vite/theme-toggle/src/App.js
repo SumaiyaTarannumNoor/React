@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useContext} from 'react';
+import { ThemeContext, ThemeProvider } from './ThemeContext';
 
-function App() {
+function ThemeToggle(){
+  const {isDarkMode, toggleTheme} = useContext(ThemeContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{background: isDarkMode ? "#333" : "#fff", color: isDarkMode ? "#fff" : "#333"}}>
+    <h1>
+      Theme Toggle
+    </h1>
+    <button onClick={toggleTheme}>
+      {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+    </button>
     </div>
-  );
+  )
+ }
+  function App(){
+    return(
+      <ThemeProvider>
+        <ThemeToggle/>
+      </ThemeProvider>
+    )
+ 
 }
 
 export default App;
